@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection.Metadata.Ecma335;
 using System.Security.Cryptography.X509Certificates;
@@ -66,24 +67,24 @@ foreach (var item in grades)
 }
 
 //5-b
-List<IDK> objects = new List<IDK>
+List<IDK> es= new();
+for (int i = 0; i < 150; i++)
 {
-    new IDK{Index=1},
-    new IDK{Index=6},
-    new IDK{Index=1},
-    new IDK{Index=7},
-};
+    es.Add(new IDK() { Index = Random.Shared.Next(1, 150) });
+}
+Console.WriteLine(es.GetByType(x => x.Index));
 
-
-
-//List<T> GetNewList<T>(List<T> lst, int indexer)
-//{
-//    var t = lst.Where(x => x.Contains(indexer));
-//    return t;
-//}
-class IDK
+public class IDK
 {
-    public int Index;
+    public int Index { get; set; }
+    public T GetByValue<T>(IEnumerable<T> enumerable, Func<T, int> valueSelector)
+    {
+        return true;
+    }
+    public override string ToString()
+    {
+        return "" + Index;
+    }
 }
 
 class Stu
