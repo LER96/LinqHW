@@ -62,10 +62,15 @@ foreach (var item in combineList)
 
 
 //5
-
-
+List<IDK> es = new();
+for (int i = 0; i < 150; i++)
+{
+    es.Add(new IDK() { Index = Random.Shared.Next(1, 150) });
+}
+Console.WriteLine(es.ReturnType(e => e.Index));
 public static class ExtensionMethod
 {
+    //5.1
     public static void PrintAll<T>(this IEnumerable<T> list)
     {
         foreach (T item in list)
@@ -73,7 +78,7 @@ public static class ExtensionMethod
             Console.WriteLine(item);
         }
     }
-
+    //5.2
     public static T ReturnType<T>(this IEnumerable<T> collection, Func<T, int> predecate)
     {
         T item=default;
@@ -89,32 +94,25 @@ public static class ExtensionMethod
         }
         return item;
     }
-
-    public static T ReturnType<T>(this IEnumerable<T> collection) where: is IComparable<T>
+    //5.3
+    public static T ReturnType<T>(this IEnumerable<T> collection) where T: IComparable<T>
     {
         T i = default;
-        int heightest = 0;
-
         foreach(var item in collection)
         {
-            
+            if(item.CompareTo(i)>0)
+            {
+                i= item;
+            }
         }
         return i;
     }
 }
 
 
-
-
-
-
 public class IDK
 {
     public int Index { get; set; }
-    //public T GetByValue<T>(IEnumerable<T> enumerable, Func<T, int> valueSelector)
-    //{
-    //    return true;
-    //}
     public override string ToString()
     {
         return "" + Index;
